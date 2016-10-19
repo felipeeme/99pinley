@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Felipe Marinelli" />
+        <meta name="Resource-type" content="Document" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Pinley - The imaginary blog</title>
+        <link href="shared/css/lib/bootstrap.min.css" rel="stylesheet">
+        <link href="shared/css/styles.css" rel="stylesheet">
+        
+    </head>
+    <body ng-app="masonryApp">
+
+    <!--partial: navigation-->
+    <nav class="navbar navbar-default" role="navigation">
+
+        <div class="container">
+        <div class="wrapper">
+            
+            <div class="navbar-header">
+                 
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                     <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button> 
+                <a href="#" class="brand" title="Pinley - The imaginary blog">
+                    <h1>Pinley</h1><small>The imaginary blog</small>
+                </a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control search" ng-model="filter" ng-model-options="{debounce : 500}" placeholder="example: est" />
+                    </div> 
+                </form>
+                
+            </div>
+
+        </div>
+        </div>
+        
+    </nav>
+    <!--//partial: navigation-->
+
+    <!--partial: main content-->
+    <article class="main container row" ng-controller="pinleyApp">
+        <div class="col-md-12 panel panel-body wrapper results" ng-show="filter">
+            Search result for <strong>"<span ng-bind="filter"></span>"</strong>
+        </div>
+
+        <div class="col-md-12" masonry preserve-order>
+
+            <!--ng-repeat: item-->
+            <div class="panel panel-default masonry-brick panel-item" ng-repeat="brick in bricks | filter : {title:filter} | limitTo: 20">
+                <div class="panel-body" style="background-image: url('{{brick.url}}')">
+                     <img class="img-responsive center-block" src={{brick.url}} alt={{brick.title}}>
+                     </img>
+                </div>
+                <div class="panel-footer">
+                    <h4 class="item-title">{{brick.title | limitTo: 12}}</h4>
+                    <span class="item-category">Item Category</span>
+                    <span class="item-description">{{brick.title}}</span>
+                </div>
+            </div>
+            <!--//ng-repeat-->
+           
+        </div>
+    </article>
+    <!--//partial: main content-->
+
+    <!--lib-->
+    <script src="shared/js/lib/jquery.min.js"></script>
+    <script src="shared/js/lib/angular.min.js"></script>
+    <script src="shared/js/lib/bootstrap.min.js"></script>
+
+    <!--components-->
+    <script src="shared/js/vendor/jquery-bridget.js"></script>
+    <script src="shared/js/vendor/get-size.js"></script>
+    <script src="shared/js/vendor/ev-emitter.js"></script>
+    <script src="shared/js/vendor/matches-selector.js"></script>
+    <script src="shared/js/vendor/fizzy-ui-utils.js"></script>
+    <script src="shared/js/vendor/outlayer-item.js"></script>
+    <script src="shared/js/vendor/outlayer.js"></script>
+    <script src="shared/js/vendor/masonry.js"></script>
+    <script src="shared/js/vendor/imagesloaded.min.js"></script>
+    <script src="shared/js/vendor/angular-masonry.min.js"></script>
+
+    <!--app-->
+    <script src="shared/js/app.js"></script>
+
+    </body>
+</html>
